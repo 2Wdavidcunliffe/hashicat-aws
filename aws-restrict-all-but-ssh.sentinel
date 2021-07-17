@@ -25,6 +25,8 @@ SGIngressRules = filter tfplan.resource_changes as address, rc {
 violatingSGRules = plan.filter_attribute_contains_items_from_list(SGIngressRules,
                   "cidr_blocks",forbidden_cidrs, true)
 
+SafeSGPorts = [443, 80, 22]
+
 # Get all Security Groups
 allSGs = plan.find_resources("aws_security_group")
 
@@ -37,14 +39,16 @@ for allSGs as address, sg {
 
   # Filter to violating CIDR blocks
   # Warnings will not be printed for violations since the last parameter is false
-  violatingIRs = plan.filter_attribute_contains_items_from_list(ingressRules,
-                 "cidr_blocks", forbidden_cidrs, false)
+  # violatingIRs = plan.filter_attribute_contains_items_from_list(ingressRules,
+  #                "cidr_blocks", forbidden_cidrs, false)
+  violatingIRs = plan.filter_attribute_not_in_list(ingressRules,
+                  "from_port", SafeSGPorts, true)
 
   # Print violation messages
   if length(violatingIRs["messages"]) > 0 {
     violatingSGsCount += 1
     print("SG Ingress Violation:", address, "has at least one ingress rule",
-          "with forbidden cidr blocks")
+          "with forbidden ports")
     plan.print_violations(violatingIRs["messages"], "Ingress Rule")
   }  // end if
 
