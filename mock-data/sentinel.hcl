@@ -1,59 +1,13 @@
-mock "tfconfig" {
-  module {
-    source = "mock-tfconfig.sentinel"
-  }
-}
-
-mock "tfconfig/v1" {
-  module {
-    source = "mock-tfconfig.sentinel"
-  }
-}
-
-mock "tfconfig/v2" {
-  module {
-    source = "mock-tfconfig-v2.sentinel"
-  }
-}
-
-mock "tfplan" {
-  module {
-    source = "mock-tfplan.sentinel"
-  }
-}
-
-mock "tfplan/v1" {
-  module {
-    source = "mock-tfplan.sentinel"
-  }
-}
+#policy "aws-restrict-all-but-ssh" {
+#    enforcement_level = "hard-mandatory"
+#}
 
 mock "tfplan/v2" {
   module {
-    source = "mock-tfplan-v2.sentinel"
+    source = "mock-data/mock-tfplan-v2.sentinel"
   }
 }
 
-mock "tfstate" {
-  module {
-    source = "mock-tfstate.sentinel"
-  }
-}
-
-mock "tfstate/v1" {
-  module {
-    source = "mock-tfstate.sentinel"
-  }
-}
-
-mock "tfstate/v2" {
-  module {
-    source = "mock-tfstate-v2.sentinel"
-  }
-}
-
-mock "tfrun" {
-  module {
-    source = "mock-tfrun.sentinel"
-  }
+module "tfplan-functions" {
+  source = "https://raw.githubusercontent.com/hashicorp/terraform-guides/master/governance/third-generation/common-functions/tfplan-functions/tfplan-functions.sentinel"
 }
