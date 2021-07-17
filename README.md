@@ -5,4 +5,4 @@ Includes "Meow World" website.
 
 [![CircleCI](https://circleci.com/gh/hashicorp/hashicat-aws.svg?style=svg)](https://circleci.com/gh/hashicorp/hashicat-aws)
 
-sentinel apply -trace aws-restrict-all-but-ssh.sentinel
+sentinel apply -trace aws-restrict-all-but-ssh.sentinel 
