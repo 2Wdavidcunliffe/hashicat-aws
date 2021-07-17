@@ -150,47 +150,47 @@ resource "aws_instance" "hashicat" {
 # Set up some environment variables for our script.
 # Add execute permissions to our scripts.
 # Run the deploy_app.sh script.
-resource "null_resource" "configure-cat-app" {
-  depends_on = [aws_eip_association.hashicat]
+# resource "null_resource" "configure-cat-app" {
+#   depends_on = [aws_eip_association.hashicat]
 
-  triggers = {
-    build_number = timestamp()
-  }
+#   triggers = {
+#     build_number = timestamp()
+#   }
 
-  provisioner "file" {
-    source      = "files/"
-    destination = "/home/ubuntu/"
+#   provisioner "file" {
+#     source      = "files/"
+#     destination = "/home/ubuntu/"
 
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = tls_private_key.hashicat.private_key_pem
-      host        = aws_eip.hashicat.public_ip
-    }
-  }
+#     connection {
+#       type        = "ssh"
+#       user        = "ubuntu"
+#       private_key = tls_private_key.hashicat.private_key_pem
+#       host        = aws_eip.hashicat.public_ip
+#     }
+#   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo apt -y update",
-      "sleep 15",
-      "sudo apt -y update",
-      "sudo apt -y install apache2",
-      "sudo systemctl start apache2",
-      "sudo chown -R ubuntu:ubuntu /var/www/html",
-      "chmod +x *.sh",
-      "PLACEHOLDER=${var.placeholder} WIDTH=${var.width} HEIGHT=${var.height} PREFIX=${var.prefix} ./deploy_app.sh",
-      "sudo apt -y install cowsay",
-      "cowsay Mooooooooooo!",
-    ]
+#   provisioner "remote-exec" {
+#     inline = [
+#       "sudo apt -y update",
+#       "sleep 15",
+#       "sudo apt -y update",
+#       "sudo apt -y install apache2",
+#       "sudo systemctl start apache2",
+#       "sudo chown -R ubuntu:ubuntu /var/www/html",
+#       "chmod +x *.sh",
+#       "PLACEHOLDER=${var.placeholder} WIDTH=${var.width} HEIGHT=${var.height} PREFIX=${var.prefix} ./deploy_app.sh",
+#       "sudo apt -y install cowsay",
+#       "cowsay Mooooooooooo!",
+#     ]
 
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = tls_private_key.hashicat.private_key_pem
-      host        = aws_eip.hashicat.public_ip
-    }
-  }
-}
+#     connection {
+#       type        = "ssh"
+#       user        = "ubuntu"
+#       private_key = tls_private_key.hashicat.private_key_pem
+#       host        = aws_eip.hashicat.public_ip
+#     }
+#   }
+# }
 
 resource "tls_private_key" "hashicat" {
   algorithm = "RSA"
