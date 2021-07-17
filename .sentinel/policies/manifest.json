@@ -1,0 +1,10 @@
+{
+	"records": [
+		{
+			"key": "aws-restrict-all-but-ssh",
+			"source": "./aws-restrict-all-but-ssh.sentinel",
+			"sourceSum": "",
+			"dest": "/root/hashicat-aws/aws-restrict-all-but-ssh.sentinel"
+		}
+	]
+}

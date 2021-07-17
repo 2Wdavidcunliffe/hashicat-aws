@@ -1,0 +1,50 @@
+id = "run-CmoDtPeiMcx8STod"
+created_at = "2021-07-17T14:13:44.097Z"
+message = "Queued manually using Terraform"
+commit_sha = undefined
+speculative = true
+is_destroy = false
+refresh = true
+refresh_only = false
+replace_addrs = null
+target_addrs = null
+
+variables = {
+	"AWS_ACCESS_KEY_ID": {
+		"category":  "env",
+		"sensitive": false,
+	},
+	"AWS_SECRET_ACCESS_KEY": {
+		"category":  "env",
+		"sensitive": true,
+	},
+	"prefix": {
+		"category":  "terraform",
+		"sensitive": false,
+	},
+}
+
+organization = {
+	"name": "davidcunliffe-training",
+}
+
+workspace = {
+	"auto_apply":  false,
+	"created_at":  "2021-07-17T13:27:02.919Z",
+	"description": "",
+	"id":          "ws-rVBPGcHnEToUDTHN",
+	"name":        "hashicat-dev",
+	"vcs_repo": {
+		"branch":             "Dev",
+		"display_identifier": "2Wdavidcunliffe/hashicat-aws",
+		"identifier":         "2Wdavidcunliffe/hashicat-aws",
+		"ingress_submodules": false,
+	},
+	"working_directory": "",
+}
+
+cost_estimate = {
+	"delta_monthly_cost":    "8.6304",
+	"prior_monthly_cost":    "0.0",
+	"proposed_monthly_cost": "8.6304",
+}
